@@ -37,6 +37,36 @@ El PoC se estructurará para implementar y comparar las siguientes estrategias:
     *   *Ventajas*: Máximo aislamiento de datos, alto rendimiento y seguridad.
     *   *Desventajas*: Mayor costo de infraestructura, mayor complejidad en la gestión de bases de datos y escalabilidad horizontal.
 
+### Avance de Investigación
+
+En este proyecto Nestjs-Prisma-RBAC, se ha logrado un avance significativo con la integración de **Prisma como ORM**, estableciendo una conexión exitosa con una base de datos **PostgreSQL en un entorno local**.
+
+🔗 [Repositorio en GitHub: Nestjs-Prisma-RBAC](https://github.com/tu-usuario/Nestjs-Prisma-RBAC) <!-- ¡IMPORTANTE!: Reemplaza 'tu-usuario' con tu nombre de usuario de GitHub para que el enlace sea funcional. -->
+
+Este hito marca el inicio formal de la configuración de la capa de persistencia, lo cual es fundamental para el desarrollo e implementación de los módulos de negocio con soporte real en base de datos. Actualmente, se han explorado y configurado los aspectos básicos de Prisma, incluyendo:
+
+*   Inicialización del cliente Prisma dentro del proyecto NestJS.
+*   Generación del esquema inicial (`schema.prisma`) conectado a PostgreSQL local.
+*   Ejecución de las primeras migraciones para validar el flujo (`prisma migrate dev`).
+*   Validación del `datasource` en `schema.prisma` y la variable `DATABASE_URL` en `.env` para garantizar una conexión estable y funcional.
+
+Con estos avances, la arquitectura del PoC comienza a tomar forma de manera más concreta hacia los objetivos principales del proyecto:
+
+*   Construir módulos en NestJS con Prisma como capa de datos para la interacción con la base de datos.
+*   Definir entidades iniciales (`User`, `Task`) que sirvan de base para la implementación de RBAC.
+*   Preparar las bases técnicas para aplicar las diferentes estrategias de multitenancy sobre la base de datos, en línea con los modelos definidos.
+
+Este progreso complementa los logros previos en la fase de investigación y conceptualización:
+
+*   Creación de un modelo especializado en Ollama (`tenant-gpt`).
+*   Elaboración de un diccionario de `prompts` para guiar la ruta de estudio y desarrollo.
+*   Diseño de un diagrama comparativo de estrategias de multitenancy.
+*   Estructuración inicial del proyecto en GitHub como un laboratorio de práctica y exploración.
+
+---
+
+**¡Esperamos que este PoC sirva como una base sólida para futuras implementaciones multitenant robustas y eficientes!**
+
 ## Estructura del Proyecto
 
 El repositorio estará organizado para facilitar la navegación y comprensión de cada estrategia. Cada enfoque de multitenencia se implementará de manera modular, permitiendo comparar directamente las implementaciones de CRUD y RBAC bajo cada modelo.
