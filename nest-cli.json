@@ -3,6 +3,14 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@modules/*": ["src/modules/*"],
+      "@tasks/*": ["src/modules/tasks/*"],
+      "@users/*": ["src/modules/users/*"],
+      "@prisma/*": ["src/prisma/*"]
+    }
   }
 }
