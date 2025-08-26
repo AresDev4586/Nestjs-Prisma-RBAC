@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-
+//DATABASE_URL="postgresql://postgres:0000@localhost:5432/test_tenant?schema=public"
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
