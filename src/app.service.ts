@@ -5,7 +5,7 @@ export class AppService {
     private APP_ROUTES = [
         {
             API: "Running!!",
-            description: "Go to Work"
+            description: "Go to User route"
         }
     ]
 
