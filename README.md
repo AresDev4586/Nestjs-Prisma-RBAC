@@ -67,6 +67,16 @@ Este progreso complementa los logros previos en la fase de investigación y conc
 
 **¡Esperamos que este PoC sirva como una base sólida para futuras implementaciones multitenant robustas y eficientes!**
 
+## Análisis del Proyecto
+
+El proyecto "Proyecto PoC: Estrategias de Multitenencia con NestJS, Prisma y RBAC" se presenta como una iniciativa ambiciosa para explorar y demostrar diversas estrategias de multitenencia en el backend. Utiliza NestJS como framework, Prisma como ORM, y RBAC para control de acceso basado en roles.
+
+El objetivo principal es proporcionar una referencia clara sobre cómo implementar soluciones multitenant escalables y seguras, evaluando el aislamiento de datos, rendimiento, complejidad de mantenimiento y seguridad de cada estrategia. Las estrategias a explorar incluyen "Shared Database, Shared Schema (Schema Discriminator)", "Shared Database, Separate Schemas" y "Separate Databases", cubriendo un espectro desde la facilidad inicial de implementación hasta el máximo aislamiento y seguridad.
+
+El avance de investigación destaca la exitosa integración de Prisma con PostgreSQL local, sentando las bases para los módulos de negocio y la implementación de RBAC. Este progreso incluye la inicialización del cliente Prisma, la generación del esquema inicial, la ejecución de migraciones y la validación de la conexión a la base de datos. Además, se menciona la creación de un modelo especializado en Ollama y un diccionario de prompts, lo que sugiere un enfoque integral que abarca tanto el desarrollo técnico como la investigación conceptual.
+
+En resumen, el proyecto está bien estructurado para abordar un problema complejo en el desarrollo de software moderno, con un enfoque claro en la comparación de soluciones y la provisión de una base sólida para futuras implementaciones multitenant. La modularidad de la implementación permitirá una evaluación directa de las estrategias de CRUD y RBAC bajo cada modelo de multitenencia.
+
 ## Estructura del Proyecto
 
 El repositorio estará organizado para facilitar la navegación y comprensión de cada estrategia. Cada enfoque de multitenencia se implementará de manera modular, permitiendo comparar directamente las implementaciones de CRUD y RBAC bajo cada modelo.

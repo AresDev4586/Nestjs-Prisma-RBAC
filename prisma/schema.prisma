@@ -34,3 +34,10 @@ model Task {
   createdAt   DateTime @default(now())
   user        User     @relation(fields: [userId], references: [id])
 }
+
+model Dishes {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  tenant_id   String
+}
