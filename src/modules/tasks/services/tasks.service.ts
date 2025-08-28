@@ -1,51 +1,54 @@
-import { Injectable } from '@nestjs/common';
-import { Tasks } from '../dto/tasks.type';
-import { tasksMock } from '../mocks/tasks.mock';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../../prisma/services/prisma.service';
+import { Task } from '@prisma/client';
 
 @Injectable()
 export class TasksService {
-    private tasks: Tasks[] = [...tasksMock];
+    constructor(private prisma: PrismaService) {}
 
-    getAllTasks(): Tasks[] {
-        return this.tasks;
+    async getAllTasks(tenant_id: string): Promise<Task[]> {
+        return this.prisma.task.findMany({ where: { tenant_id } });
     }
 
-    getTaskById(id: number): Tasks | undefined {
-        return this.tasks.find(task => task.id === id);
+    async getTaskById(id: number, tenant_id: string): Promise<Task | null> {
+        return this.prisma.task.findFirst({ where: { id, tenant_id } });
     }
 
-    createTask(name: string, description: string): Tasks {
-        const newTask: Tasks = {
-            id: this.tasks.length + 1,
-            name,
-            description,
-            status: false,
-        };
-        this.tasks.push(newTask);
-        return newTask;
-    }
-
-    updateTask(id: number, name: string, description: string, status: boolean): Tasks | undefined {
-        const taskIndex = this.tasks.findIndex(task => task.id === id);
-        if (taskIndex > -1) {
-            this.tasks[taskIndex] = { ...this.tasks[taskIndex], name, description, status };
-            return this.tasks[taskIndex];
+    async createTask(name: string, description: string, userId: number, tenant_id: string): Promise<Task> {
+        const user = await this.prisma.user.findFirst({
+            where: { id: userId, tenant_id }
+        });
+        if (!user) {
+            throw new NotFoundException('User not found in this tenant.');
         }
-        return undefined;
+
+        return this.prisma.task.create({
+            data: { name, description, status: false, userId, tenant_id },
+        });
     }
 
-    deleteTask(id: number): boolean {
-        const initialLength = this.tasks.length;
-        this.tasks = this.tasks.filter(task => task.id !== id);
-        return this.tasks.length < initialLength;
+    async updateTask(id: number, name: string, description: string, status: boolean, tenant_id: string): Promise<Task | null> {
+        return this.prisma.task.update({
+            where: { id, tenant_id },
+            data: { name, description, status },
+        });
     }
 
-    changeStatusTasks(id: number, status: boolean): Tasks | undefined {
-        const taskIndex = this.tasks.findIndex(task => task.id === id);
-        if (taskIndex > -1) {
-            this.tasks[taskIndex] = { ...this.tasks[taskIndex], status };
-            return this.tasks[taskIndex];
+    async deleteTask(id: number, tenant_id: string): Promise<{ deleted: boolean }> {
+        // Verificar si la tarea existe y pertenece al tenant antes de borrar
+        const taskToDelete = await this.prisma.task.findFirst({ where: { id, tenant_id } });
+        if (!taskToDelete) {
+            throw new NotFoundException('Task not found in this tenant.');
         }
-        return undefined;
+
+        await this.prisma.task.delete({ where: { id } });
+        return { deleted: true };
+    }
+
+    async changeStatusTasks(id: number, status: boolean, tenant_id: string): Promise<Task | null> {
+        return this.prisma.task.update({
+            where: { id, tenant_id },
+            data: { status },
+        });
     }
 }

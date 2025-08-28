@@ -20,4 +20,17 @@ model User {
   email     String   @unique
   name      String?
   createdAt DateTime @default(now())
+  tenant_id String
+  tasks Task[]
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  status      Boolean
+  userId      Int
+  tenant_id   String
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
 }
